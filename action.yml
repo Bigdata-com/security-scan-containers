@@ -19,7 +19,7 @@ inputs:
     required: false
     default: "2.0.2"
 runs:
-  using: "bash"
+  using: "composite"
   steps:
     - name: Analyze Docker image
       run: analyze-script.sh
