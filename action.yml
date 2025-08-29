@@ -77,9 +77,14 @@ runs:
 
         # Scan the image
         echo "Scanning image: ${IMAGE_NAME}"
-        ./fcs scan image "${IMAGE_NAME}" --upload --no-color # --show-full-description  --show-full-detection-details
+        SCAN_OUTPUT=$(./fcs scan image "${IMAGE_NAME}" --upload --no-color --show-full-description  --show-full-detection-details)
 
+        # Remove configuration file
         rm ~/.crowdstrike/fcs.json
+        if echo "$SCAN_OUTPUT" | grep -q "NO ACTION"; then
+          echo "Error: 'NO ACTION' not found in scan output. Failing script."
+          exit 1
+        fi
       shell: bash
       env:
         FALCON_CLIENT_ID: ${{ inputs.falcon_client_id }}
