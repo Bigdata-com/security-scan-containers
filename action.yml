@@ -4,7 +4,6 @@ inputs:
   image_name:
     description: "Docker image to scan"
     required: true
-    default: "alpine:latest"
   falcon_client_id:
     description: "CrowdStrike Falcon client ID "
     required: true
