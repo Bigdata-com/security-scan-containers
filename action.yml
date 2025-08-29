@@ -81,7 +81,7 @@ runs:
 
         # Remove configuration file
         rm ~/.crowdstrike/fcs.json
-        if echo "$SCAN_OUTPUT" | grep -q "NO ACTION"; then
+        if ! echo "$SCAN_OUTPUT" | grep -q "NO ACTION"; then
           echo "Error: 'NO ACTION' not found in scan output. Failing script."
           exit 1
         fi
