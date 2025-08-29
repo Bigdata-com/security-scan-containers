@@ -1,0 +1,33 @@
+name: "Docker image scanner"
+description: "Analyze Docker images for security vulnerabilities"
+inputs:
+  image_name:
+    description: "Docker image to scan"
+    required: true
+    default: "alpine:latest"
+  falcon_client_id:
+    description: "CrowdStrike Falcon client ID "
+    required: true
+  falcon_client_secret:
+    description: "CrowdStrike Falcon client secret (optional)"
+    required: true
+  falcon_region:
+    description: "CrowdStrike Falcon region (optional)"
+    required: false
+    default: eu-1
+  fcs_version:
+    description: "CrowdStrike Falcon Cloud Security CLI version"
+    required: false
+    default: "2.0.2"
+runs:
+  using: "bash"
+  steps:
+    - name: Analyze Docker image
+      run: analyze-script.sh
+      shell: bash
+      env:
+        FALCON_CLIENT_ID: ${{ inputs.falcon_client_id }}
+        FALCON_CLIENT_SECRET: ${{ inputs.falcon_client_secret }}
+        FALCON_REGION: ${{ inputs.falcon_region }}
+        FCS_VERSION: ${{ inputs.fcs_version }}
+        IMAGE_NAME: ${{ inputs.image_name }}

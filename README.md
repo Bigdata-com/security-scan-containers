@@ -1,0 +1,1 @@
+# Scan container images for security vulnerabilities
