@@ -22,7 +22,7 @@ runs:
   using: "composite"
   steps:
     - name: Analyze Docker image
-      run: analyze-script.sh
+      run: ./analyze-script.sh
       shell: bash
       env:
         FALCON_CLIENT_ID: ${{ inputs.falcon_client_id }}
